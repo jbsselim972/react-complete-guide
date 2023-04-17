@@ -1,4 +1,6 @@
 import React from "react";
+
+import ExpenseDate from "./ExpenseDate";
 import "./ExpenseItem.css";
 
 const ExpenseItem: React.FC<{
@@ -6,17 +8,10 @@ const ExpenseItem: React.FC<{
   amount: number;
   date: Date;
 }> = ({ title, amount, date }) => {
-  const month = date.toLocaleString("fr-FR", { month: "long" });
-  const day = date.toLocaleString("fr-FR", { day: "2-digit" });
-  const year = date.getFullYear();
   return (
     <>
       <div className="expense-item">
-        <div>
-          <div>{day}</div>
-          <div>{month}</div>
-          <div>{year}</div>
-        </div>
+        <ExpenseDate date={date} />
         <div className="expense-item__description">
           <h2>{title}</h2>
         </div>
