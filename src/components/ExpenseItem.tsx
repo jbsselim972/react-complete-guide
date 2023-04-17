@@ -3,11 +3,7 @@ import React from "react";
 import ExpenseDate from "./ExpenseDate";
 import "./ExpenseItem.css";
 
-const ExpenseItem: React.FC<{
-  title: string;
-  amount: number;
-  date: Date;
-}> = ({ title, amount, date }) => {
+const ExpenseItem: React.FC<Expense> = ({ title, amount, date }) => {
   return (
     <>
       <div className="expense-item">
