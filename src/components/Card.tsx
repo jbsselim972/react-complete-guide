@@ -2,10 +2,12 @@ import React from "react";
 
 import "./Card.css";
 
-const Card: React.FC<{
+interface CardProps {
   className?: string;
   children: React.ReactNode | React.ReactNode[];
-}> = ({ children, className }) => {
+}
+
+const Card: React.FC<CardProps> = ({ children, className }) => {
   const classes = "card " + className;
   return <div className={classes}>{children}</div>;
 };
