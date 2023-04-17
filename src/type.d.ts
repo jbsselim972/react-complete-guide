@@ -4,3 +4,8 @@ interface Expense {
   amount: number;
   date: Date;
 }
+
+interface CardProps {
+  className?: string;
+  children: React.ReactNode | React.ReactNode[];
+}
