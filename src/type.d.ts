@@ -9,6 +9,11 @@ interface ExpenseFormProps {
   onSaveExpenseData: ({}: Expense) => void;
 }
 
+interface ExpenseFilterProps {
+  selectedYear: string;
+  onSelectedYear: (year: string) => void;
+}
+
 interface NewExpenseProps {
   onAddExpense: ({}: Expense) => void;
 }
