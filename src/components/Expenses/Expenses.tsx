@@ -15,6 +15,11 @@ const Expenses: React.FC<ExpenseProps> = ({ expenses }) => {
     setFilteredYear(selectedYear);
   };
 
+  const filteredExpenses = expenses.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+
+  console.log(expenses);
   return (
     <>
       <Card className="expenses">
@@ -22,11 +27,8 @@ const Expenses: React.FC<ExpenseProps> = ({ expenses }) => {
           selectedYear={filteredYear}
           onSelectedYear={filterChangedHandler}
         />
-        {expenses.map((expense, id) => (
-          <>
-            {console.log(expense)}
-            <ExpenseItem key={id} {...expense} />
-          </>
+        {filteredExpenses.map(({ id, title, amount, date }) => (
+          <ExpenseItem key={id} title={title} amount={amount} date={date} />
         ))}
       </Card>
     </>
