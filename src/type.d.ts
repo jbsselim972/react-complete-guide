@@ -7,6 +7,7 @@ interface Expense {
 
 interface ExpenseFormProps {
   onSaveExpenseData: ({}: Expense) => void;
+  toggleForm: () => void;
 }
 
 interface ExpenseFilterProps {

@@ -2,7 +2,10 @@ import React, { ChangeEvent, useState, FormEvent } from "react";
 
 import "./ExpenseForm.css";
 
-const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSaveExpenseData }) => {
+const ExpenseForm: React.FC<ExpenseFormProps> = ({
+  onSaveExpenseData,
+  toggleForm,
+}) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState("");
@@ -32,12 +35,14 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSaveExpenseData }) => {
     setTitle("");
     setAmount(0);
     setDate("");
+    toggleForm();
   };
 
-  const clearHandler = () => {
+  const cancelHandler = () => {
     setTitle("");
     setAmount(0);
     setDate("");
+    toggleForm();
   };
 
   return (
@@ -69,10 +74,10 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSaveExpenseData }) => {
         </div>
       </div>
       <div className="new-expense__actions">
-        <button type="submit">Add Expense</button>
-        <button type="button" onClick={clearHandler}>
-          Clear
+        <button type="button" onClick={cancelHandler}>
+          Cancel
         </button>
+        <button type="submit">Add Expense</button>
       </div>
     </form>
   );
