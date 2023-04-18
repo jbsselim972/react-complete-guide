@@ -14,6 +14,10 @@ interface ExpenseFilterProps {
   onSelectedYear: (year: string) => void;
 }
 
+interface ExpensesListProps {
+  expenses: Expense[];
+}
+
 interface NewExpenseProps {
   onAddExpense: ({}: Expense) => void;
 }
