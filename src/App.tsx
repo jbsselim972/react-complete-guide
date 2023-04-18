@@ -32,13 +32,6 @@ const DUMMY_EXPENSES = [
 const App: React.FC = () => {
   const [expenses, setExpenses] = useState<Expense[]>(DUMMY_EXPENSES);
 
-  useEffect(() => {
-    // const sortedExpenses = expenses
-    //   .sort((acc, expense) => acc.date.getTime() - expense.date.getTime())
-    //   .reverse();
-    // setExpenses(sortedExpenses);
-  }, [expenses]);
-
   const addExpenseHandler = (expense: Expense) => {
     setExpenses((prevExpenses) => {
       // console.log([expense, ...prevExpenses]);

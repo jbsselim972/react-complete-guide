@@ -19,6 +19,13 @@ const Expenses: React.FC<ExpenseProps> = ({ expenses }) => {
     return expense.date.getFullYear().toString() === filteredYear;
   });
 
+  let expensesContent: JSX.Element | JSX.Element[] = <p>No expenses found.</p>;
+  if (filteredExpenses.length > 0) {
+    expensesContent = filteredExpenses.map(({ id, title, amount, date }) => (
+      <ExpenseItem key={id} title={title} amount={amount} date={date} />
+    ));
+  }
+
   console.log(expenses);
   return (
     <>
@@ -27,9 +34,7 @@ const Expenses: React.FC<ExpenseProps> = ({ expenses }) => {
           selectedYear={filteredYear}
           onSelectedYear={filterChangedHandler}
         />
-        {filteredExpenses.map(({ id, title, amount, date }) => (
-          <ExpenseItem key={id} title={title} amount={amount} date={date} />
-        ))}
+        {expensesContent}
       </Card>
     </>
   );
