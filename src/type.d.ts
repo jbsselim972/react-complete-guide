@@ -27,3 +27,13 @@ interface CardProps {
   className?: string;
   children: React.ReactNode | React.ReactNode[];
 }
+
+interface ChartProps {
+  dataPoints: ChartBar[];
+}
+
+interface ChartBar {
+  value: number;
+  label: string;
+  maxValue?: number | null;
+}
