@@ -1,7 +1,7 @@
 import { SetStateAction, useEffect, useState } from "react";
-import Expenses from "./components/Expenses/Expenses";
-import NewExpense from "./components/NewExpense/NewExpense";
-import ExpensesChart from "./components/Expenses/ExpensesChart";
+import Expenses from "./components/ExpenseTracker/Expenses/Expenses";
+import NewExpense from "./components/ExpenseTracker/NewExpense/NewExpense";
+import ExpensesChart from "./components/ExpenseTracker/Expenses/ExpensesChart";
 
 const DUMMY_EXPENSES = [
   {
