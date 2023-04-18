@@ -2,9 +2,9 @@ import React, { ChangeEvent, useState, FormEvent } from "react";
 
 import "./ExpenseForm.css";
 
-const ExpenseForm: React.FC = () => {
+const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSaveExpenseData }) => {
   const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
   const [date, setDate] = useState("");
 
   const titleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -12,7 +12,7 @@ const ExpenseForm: React.FC = () => {
   };
 
   const amountChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setAmount(e.target.value);
+    setAmount(e.target.valueAsNumber);
   };
 
   const dateChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,18 +24,19 @@ const ExpenseForm: React.FC = () => {
 
     const expenseData = {
       title,
-      amount,
+      amount: amount,
       date: new Date(date),
     };
 
+    onSaveExpenseData(expenseData);
     setTitle("");
-    setAmount("");
+    setAmount(0);
     setDate("");
   };
 
   const clearHandler = () => {
     setTitle("");
-    setAmount("");
+    setAmount(0);
     setDate("");
   };
 

@@ -29,9 +29,13 @@ const App: React.FC = () => {
     },
   ];
 
+  const addExpenseHandler = (expenses: Expense) => {
+    console.log(expenses);
+  };
+
   return (
     <>
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses expenses={expenses} />
     </>
   );
