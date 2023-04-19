@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-interface ButtonProps {
-  type: HTMLButtonElement["type"] | undefined;
-  onClick?: () => void;
-  children: React.ReactNode;
-}
+// interface ButtonProps {
+//   type: HTMLButtonElement["type"] | undefined;
+//   onClick?: () => void;
+//   children: React.ReactNode;
+// }
 
 const Button = styled.button`
   width: 100%;
