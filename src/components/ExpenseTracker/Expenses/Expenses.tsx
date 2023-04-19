@@ -1,6 +1,6 @@
 import React from "react";
 
-import Card from "../UI/Card";
+import Card from "../../UI/Card";
 import ExpenseFilter from "./ExpenseFilter";
 import ExpensesList from "./ExpensesList";
 import "./Expenses.css";
