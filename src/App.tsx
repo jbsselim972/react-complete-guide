@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Expenses from "./components/ExpenseTracker/Expenses/Expenses";
 import NewExpense from "./components/ExpenseTracker/NewExpense/NewExpense";
 import CourseGoalList from "./components/CourseGoals/CourseGoalList/CourseGoalList";
@@ -106,18 +106,28 @@ const CourseGoals: React.FC = () => {
 const LoginPage: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const loggedInInfos = localStorage.getItem("isLoggedIn");
+
+    if (loggedInInfos) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   const loginHandler = (email: string, password: string) => {
     // We should of course check email and password
     // But it's just a dummy/ demo anyways
+    localStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
   };
 
   const logoutHandler = () => {
+    localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
   };
 
   return (
-    <React.Fragment>
+    <>
       <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
@@ -127,7 +137,7 @@ const LoginPage: React.FC = () => {
           />
         )}
       </main>
-    </React.Fragment>
+    </>
   );
 };
 
