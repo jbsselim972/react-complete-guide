@@ -37,3 +37,8 @@ interface ChartBar {
   label: string;
   maxValue?: number | null;
 }
+
+interface Auth {
+  isAuthenticated: boolean;
+  onLogout: () => void;
+}

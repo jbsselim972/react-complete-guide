@@ -5,6 +5,9 @@ import CourseGoalList from "./components/CourseGoals/CourseGoalList/CourseGoalLi
 import CourseInput from "./components/CourseGoals/CourseInput/CourseInput";
 
 import "./App.css";
+import MainHeader from "./components/LoginPage/MainHeader/MainHeader";
+import Login from "./components/LoginPage/Login/Login";
+import Home from "./components/LoginPage/Home/Home";
 
 const DUMMY_EXPENSES = [
   {
@@ -100,8 +103,36 @@ const CourseGoals: React.FC = () => {
   );
 };
 
+const LoginPage: React.FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const loginHandler = (email: string, password: string) => {
+    // We should of course check email and password
+    // But it's just a dummy/ demo anyways
+    setIsLoggedIn(true);
+  };
+
+  const logoutHandler = () => {
+    setIsLoggedIn(false);
+  };
+
+  return (
+    <React.Fragment>
+      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+      <main>
+        {!isLoggedIn && <Login onLogin={loginHandler} />}
+        {isLoggedIn && (
+          <Home
+          // onLogout={logoutHandler}
+          />
+        )}
+      </main>
+    </React.Fragment>
+  );
+};
+
 const App: React.FC = () => {
-  return <CourseGoals />;
+  return <LoginPage />;
 };
 
 export default App;
