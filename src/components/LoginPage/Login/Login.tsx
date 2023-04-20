@@ -16,9 +16,16 @@ const Login = ({ onLogin }: onLogin) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes("@") && enteredPassword.trim().length > 6
-    );
+    const debounce = setTimeout(() => {
+      console.log("test");
+      setFormIsValid(
+        enteredEmail.includes("@") && enteredPassword.trim().length > 6
+      );
+    }, 500);
+
+    return () => {
+      clearTimeout(debounce);
+    };
   }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
