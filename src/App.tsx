@@ -7,7 +7,9 @@ import CourseInput from "./components/CourseGoals/CourseInput/CourseInput";
 import MainHeader from "./components/LoginPage/MainHeader/MainHeader";
 import Login from "./components/LoginPage/Login/Login";
 import Home from "./components/LoginPage/Home/Home";
-import AuthContext from "./components/LoginPage/store/auth-context";
+import AuthContext, {
+  AuthContextProvider,
+} from "./components/LoginPage/store/auth-context";
 import "./App.css";
 
 const DUMMY_EXPENSES = [
@@ -109,11 +111,13 @@ const LoginPage: React.FC = () => {
 
   return (
     <>
-      <MainHeader />
-      <main>
-        {!authContext.isLoggedIn && <Login />}
-        {authContext.isLoggedIn && <Home />}
-      </main>
+      <AuthContextProvider>
+        <MainHeader />
+        <main>
+          {!authContext.isLoggedIn && <Login />}
+          {authContext.isLoggedIn && <Home />}
+        </main>
+      </AuthContextProvider>
     </>
   );
 };
