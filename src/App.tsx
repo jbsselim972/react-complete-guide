@@ -129,15 +129,13 @@ const LoginPage: React.FC = () => {
 
   return (
     <>
-      <AuthContext.Provider value={{ isLoggedIn: isLoggedIn }}>
+      <AuthContext.Provider
+        value={{ isLoggedIn: isLoggedIn, onLogout: logoutHandler }}
+      >
         <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
         <main>
           {!isLoggedIn && <Login onLogin={loginHandler} />}
-          {isLoggedIn && (
-            <Home
-            // onLogout={logoutHandler}
-            />
-          )}
+          {isLoggedIn && <Home onLogout={logoutHandler} />}
         </main>
       </AuthContext.Provider>
     </>

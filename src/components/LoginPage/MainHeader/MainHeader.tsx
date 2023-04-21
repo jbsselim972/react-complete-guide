@@ -12,7 +12,7 @@ const MainHeader: React.FC<Auth> = ({ isAuthenticated, onLogout }) => {
   return (
     <header className={classes["main-header"]}>
       <h1>A Typical Page</h1>
-      <Navigation isAuthenticated={isAuthenticated} onLogout={onLogout} />
+      <Navigation />
     </header>
   );
 };

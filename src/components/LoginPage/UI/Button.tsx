@@ -3,7 +3,7 @@ import React from "react";
 import classes from "./Button.module.css";
 
 interface ButtonProps {
-  type: HTMLButtonElement["type"] | undefined;
+  type?: HTMLButtonElement["type"] | undefined;
   children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
