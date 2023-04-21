@@ -103,6 +103,7 @@ const Login: React.FC<onLogin> = ({ onLogin }) => {
   };
 
   const validateEmailHandler = () => {
+    // setEmailIsValid(enteredEmail.includes("@"));
     dispatchEmail(new ValidateAction());
   };
 
