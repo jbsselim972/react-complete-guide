@@ -42,7 +42,3 @@ interface Auth {
   isAuthenticated: boolean;
   onLogout: () => void;
 }
-
-type RefType = {
-  start: () => { focus: () => void };
-};
