@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
+
 import Expenses from "./components/ExpenseTracker/Expenses/Expenses";
 import NewExpense from "./components/ExpenseTracker/NewExpense/NewExpense";
 import CourseGoalList from "./components/CourseGoals/CourseGoalList/CourseGoalList";
 import CourseInput from "./components/CourseGoals/CourseInput/CourseInput";
-
-import "./App.css";
 import MainHeader from "./components/LoginPage/MainHeader/MainHeader";
 import Login from "./components/LoginPage/Login/Login";
 import Home from "./components/LoginPage/Home/Home";
+import "./App.css";
+import AuthContext from "./components/LoginPage/store/auth-context";
 
 const DUMMY_EXPENSES = [
   {
@@ -128,15 +129,17 @@ const LoginPage: React.FC = () => {
 
   return (
     <>
-      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
-      <main>
-        {!isLoggedIn && <Login onLogin={loginHandler} />}
-        {isLoggedIn && (
-          <Home
-          // onLogout={logoutHandler}
-          />
-        )}
-      </main>
+      <AuthContext.Provider value={{ isLoggedIn: isLoggedIn }}>
+        <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+        <main>
+          {!isLoggedIn && <Login onLogin={loginHandler} />}
+          {isLoggedIn && (
+            <Home
+            // onLogout={logoutHandler}
+            />
+          )}
+        </main>
+      </AuthContext.Provider>
     </>
   );
 };
