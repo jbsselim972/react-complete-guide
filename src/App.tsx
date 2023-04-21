@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Expenses from "./components/ExpenseTracker/Expenses/Expenses";
 import NewExpense from "./components/ExpenseTracker/NewExpense/NewExpense";
@@ -7,8 +7,8 @@ import CourseInput from "./components/CourseGoals/CourseInput/CourseInput";
 import MainHeader from "./components/LoginPage/MainHeader/MainHeader";
 import Login from "./components/LoginPage/Login/Login";
 import Home from "./components/LoginPage/Home/Home";
-import "./App.css";
 import AuthContext from "./components/LoginPage/store/auth-context";
+import "./App.css";
 
 const DUMMY_EXPENSES = [
   {
@@ -105,39 +105,15 @@ const CourseGoals: React.FC = () => {
 };
 
 const LoginPage: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const loggedInInfos = localStorage.getItem("isLoggedIn");
-
-    if (loggedInInfos) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const loginHandler = (email: string, password: string) => {
-    // We should of course check email and password
-    // But it's just a dummy/ demo anyways
-    localStorage.setItem("isLoggedIn", "1");
-    setIsLoggedIn(true);
-  };
-
-  const logoutHandler = () => {
-    localStorage.removeItem("isLoggedIn");
-    setIsLoggedIn(false);
-  };
+  const ctx = useContext(AuthContext);
 
   return (
     <>
-      <AuthContext.Provider
-        value={{ isLoggedIn: isLoggedIn, onLogout: logoutHandler }}
-      >
-        <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
-        <main>
-          {!isLoggedIn && <Login onLogin={loginHandler} />}
-          {isLoggedIn && <Home onLogout={logoutHandler} />}
-        </main>
-      </AuthContext.Provider>
+      <MainHeader />
+      <main>
+        {!ctx.isLoggedIn && <Login />}
+        {ctx.isLoggedIn && <Home />}
+      </main>
     </>
   );
 };
