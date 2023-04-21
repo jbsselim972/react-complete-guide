@@ -10,9 +10,7 @@ const Home: React.FC = () => {
   return (
     <Card className={classes.home}>
       <h1>Welcome back!</h1>
-      <Button onClick={authContext.onLogout}>
-        <h1>Logout</h1>
-      </Button>
+      <Button onClick={authContext.onLogout}>Logout</Button>
     </Card>
   );
 };
