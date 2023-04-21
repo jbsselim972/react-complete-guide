@@ -1,4 +1,9 @@
-import React from "react";
+import React, {
+  RefObject,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from "react";
 
 import classes from "./Input.module.css";
 
@@ -12,31 +17,42 @@ interface InputProps {
   onBlur: () => void;
 }
 
-const Input: React.FC<InputProps> = ({
-  id,
-  type,
-  label,
-  value,
-  isValid,
-  onChange,
-  onBlur,
-}) => {
-  return (
-    <div
-      className={`${classes.control} ${
-        isValid === false ? classes.invalid : ""
-      }`}
-    >
-      <label htmlFor={id}>{label}</label>
-      <input
-        type={type || "text"}
-        id={id}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-      />
-    </div>
-  );
-};
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ id, label, type, isValid, value, onChange, onBlur }, ref) => {
+    const inputRef = useRef<HTMLInputElement | null>(null);
+
+    const activate = () => {
+      inputRef.current?.focus();
+    };
+
+    // useImperativeHandle(ref, () => ({
+    //   start() {
+    //     return { focus: activate };
+    //   },
+    // }));
+
+    useImperativeHandle(ref, () => {
+      return { focus: activate };
+    });
+
+    return (
+      <div
+        className={`${classes.control} ${
+          isValid === false ? classes.invalid : ""
+        }`}
+      >
+        <label htmlFor={id}>{label}</label>
+        <input
+          ref={inputRef}
+          type={type || "text"}
+          id={id}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+      </div>
+    );
+  }
+);
 
 export default Input;

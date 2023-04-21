@@ -113,6 +113,7 @@ const LoginPage: React.FC = () => {
       <AuthContextProvider>
         <MainHeader />
         <main>
+          <>{console.log(authContext.isLoggedIn)}</>
           {!authContext.isLoggedIn && <Login />}
           {authContext.isLoggedIn && <Home />}
         </main>
