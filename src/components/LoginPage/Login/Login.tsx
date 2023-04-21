@@ -84,7 +84,6 @@ const Login: React.FC<onLogin> = ({ onLogin }) => {
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      console.log("test");
       setFormIsValid(emailIsValid! && passwordIsValid!);
     }, 500);
 
@@ -95,21 +94,21 @@ const Login: React.FC<onLogin> = ({ onLogin }) => {
 
   const emailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     // setEnteredEmail(event.target.value);
-    dispatchEmail({ type: "USER_INPUT", payload: event.target.value });
+    dispatchEmail(new InputAction(event.target.value));
   };
 
   const passwordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     // setEnteredPassword(event.target.value);
-    dispatchPassword({ type: "USER_INPUT", payload: event.target.value });
+    dispatchPassword(new InputAction(event.target.value));
   };
 
   const validateEmailHandler = () => {
-    dispatchEmail({ type: "INPUT_BLUR" });
+    dispatchEmail(new ValidateAction());
   };
 
   const validatePasswordHandler = () => {
     // setPasswordIsValid(enteredPassword.trim().length > 6);
-    dispatchPassword({ type: "INPUT_BLUR" });
+    dispatchPassword(new ValidateAction());
   };
 
   const submitHandler = (event: FormEvent) => {
