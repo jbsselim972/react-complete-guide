@@ -1,55 +1,120 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 
 import Card from "../../UI/Card";
-import classes from "./Login.module.css";
 import Button from "../UI/Button";
+import classes from "./Login.module.css";
 
 type onLogin = {
   onLogin: (arg0: string, arg1: string) => void;
 };
 
-const Login = ({ onLogin }: onLogin) => {
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [emailIsValid, setEmailIsValid] = useState<boolean | null>();
-  const [enteredPassword, setEnteredPassword] = useState("");
-  const [passwordIsValid, setPasswordIsValid] = useState<boolean | null>();
+interface State {
+  value: string;
+  isValid: boolean | null;
+}
+
+const USER_INPUT = "USER_INPUT";
+const INPUT_BLUR = "INPUT_BLUR";
+class InputAction {
+  readonly type = USER_INPUT;
+  constructor(public payload: string) {}
+}
+
+class ValidateAction {
+  readonly type = INPUT_BLUR;
+}
+
+type Action = InputAction | ValidateAction;
+
+const emailReducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case USER_INPUT:
+      return {
+        ...state,
+        value: action.payload,
+        isValid: action.payload.includes("@"),
+      };
+    case INPUT_BLUR:
+      return { ...state, isValid: state.value.includes("@") };
+    default:
+      return { value: "", isValid: null };
+  }
+};
+
+const passwordReducer = (state: State, action: Action) => {
+  switch (action.type) {
+    case "USER_INPUT":
+      return {
+        ...state,
+        value: action.payload,
+        isValid: action.payload.trim().length > 6,
+      };
+    case "INPUT_BLUR":
+      return { ...state, isValid: state.value.trim().length > 6 };
+    default:
+      return { value: "", isValid: null };
+  }
+};
+
+const Login: React.FC<onLogin> = ({ onLogin }) => {
+  // const [enteredEmail, setEnteredEmail] = useState("");
+  // const [emailIsValid, setEmailIsValid] = useState<boolean | null>();
+  // const [enteredPassword, setEnteredPassword] = useState("");
+  // const [passwordIsValid, setPasswordIsValid] = useState<boolean | null>();
   const [formIsValid, setFormIsValid] = useState(false);
+
+  const [{ value: email, isValid: emailIsValid }, dispatchEmail] = useReducer(
+    emailReducer,
+    {
+      value: "",
+      isValid: null,
+    }
+  );
+  const [{ value: password, isValid: passwordIsValid }, dispatchPassword] =
+    useReducer(passwordReducer, {
+      value: "",
+      isValid: null,
+    });
 
   useEffect(() => {
     const debounce = setTimeout(() => {
       console.log("test");
-      setFormIsValid(
-        enteredEmail.includes("@") && enteredPassword.trim().length > 6
-      );
+      setFormIsValid(emailIsValid! && passwordIsValid!);
     }, 500);
 
     return () => {
       clearTimeout(debounce);
     };
-  }, [enteredEmail, enteredPassword]);
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEnteredEmail(event.target.value);
+    // setEnteredEmail(event.target.value);
+    dispatchEmail({ type: "USER_INPUT", payload: event.target.value });
   };
 
   const passwordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEnteredPassword(event.target.value);
+    // setEnteredPassword(event.target.value);
+    dispatchPassword({ type: "USER_INPUT", payload: event.target.value });
   };
 
   const validateEmailHandler = () => {
-    if (enteredEmail !== null) {
-      setEmailIsValid(enteredEmail.includes("@"));
-      return;
-    }
+    dispatchEmail({ type: "INPUT_BLUR" });
   };
 
   const validatePasswordHandler = () => {
-    setPasswordIsValid(enteredPassword.trim().length > 6);
+    // setPasswordIsValid(enteredPassword.trim().length > 6);
+    dispatchPassword({ type: "INPUT_BLUR" });
   };
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
-    onLogin(enteredEmail, enteredPassword);
+    onLogin(email, password);
   };
 
   return (
@@ -64,7 +129,7 @@ const Login = ({ onLogin }: onLogin) => {
           <input
             type="email"
             id="email"
-            value={enteredEmail}
+            value={email}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
           />
@@ -78,7 +143,7 @@ const Login = ({ onLogin }: onLogin) => {
           <input
             type="password"
             id="password"
-            value={enteredPassword}
+            value={password}
             onChange={passwordChangeHandler}
             onBlur={validatePasswordHandler}
           />
