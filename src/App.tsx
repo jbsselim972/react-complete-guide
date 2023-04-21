@@ -105,14 +105,14 @@ const CourseGoals: React.FC = () => {
 };
 
 const LoginPage: React.FC = () => {
-  const ctx = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
 
   return (
     <>
       <MainHeader />
       <main>
-        {!ctx.isLoggedIn && <Login />}
-        {ctx.isLoggedIn && <Home />}
+        {!authContext.isLoggedIn && <Login />}
+        {authContext.isLoggedIn && <Home />}
       </main>
     </>
   );
