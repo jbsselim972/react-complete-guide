@@ -19,8 +19,6 @@ const Expenses: React.FC<ExpenseProps> = ({ expenses }) => {
   const filteredExpenses = expenses.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear;
   });
-
-  console.log(expenses);
   return (
     <>
       <Card className="expenses">

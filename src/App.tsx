@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 import Expenses from "./components/ExpenseTracker/Expenses/Expenses";
 import NewExpense from "./components/ExpenseTracker/NewExpense/NewExpense";
@@ -43,7 +43,6 @@ const ExpenseTracker: React.FC = () => {
   const [expenses, setExpenses] = useState<Expense[]>(DUMMY_EXPENSES);
   const addExpenseHandler = (expense: Expense) => {
     setExpenses((prevExpenses) => {
-      // console.log([expense, ...prevExpenses]);
       return [expense, ...prevExpenses];
     });
   };
