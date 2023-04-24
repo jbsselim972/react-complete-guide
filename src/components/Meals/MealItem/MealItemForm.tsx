@@ -2,13 +2,14 @@ import React from "react";
 
 import classes from "./MealItemForm.module.css";
 import Input from "../../UI/Input";
-const MealItemForm: React.FC = () => {
+
+const MealItemForm: React.FC<{ id: string }> = ({ id }) => {
   return (
     <form className={classes.form}>
       <Input
         label="Amount"
         input={{
-          id: "amount",
+          id: `amount_${id}`,
           type: "number",
           min: "1",
           max: "5",

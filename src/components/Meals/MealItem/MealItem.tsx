@@ -3,7 +3,7 @@ import React from "react";
 import classes from "./MealItem.module.css";
 import MealItemForm from "./MealItemForm";
 
-const MealItem: React.FC<Meal> = ({ name, description, price }) => {
+const MealItem: React.FC<Meal> = ({ id, name, description, price }) => {
   const priceFmt = `${price.toFixed(2)} €`;
 
   return (
@@ -14,7 +14,7 @@ const MealItem: React.FC<Meal> = ({ name, description, price }) => {
       <div className={classes.description}>{description}</div>
       <div className={classes.price}>{priceFmt}</div>
       <div>
-        <MealItemForm />
+        <MealItemForm id={id} />
       </div>
     </li>
   );
