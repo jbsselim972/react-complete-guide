@@ -16,13 +16,15 @@ interface InputProps {
   input: InputAttr;
 }
 
-const Input: React.FC<InputProps> = ({ label, input }) => {
-  return (
-    <div className={classes.input}>
-      <label htmlFor={input.id}>{label}</label>
-      <input {...input} />
-    </div>
-  );
-};
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ input, label }, ref) => {
+    return (
+      <div className={classes.input}>
+        <label htmlFor={input.id}>{label}</label>
+        <input ref={ref} {...input} />
+      </div>
+    );
+  }
+);
 
 export default Input;

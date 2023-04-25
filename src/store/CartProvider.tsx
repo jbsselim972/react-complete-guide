@@ -53,7 +53,7 @@ const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     defaultCartState
   );
 
-  const addItemToCart = (item: any) => {
+  const addItemToCart = (item: Meal) => {
     dispatchCartAction({ type: "ADD", item: item });
   };
 
