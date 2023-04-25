@@ -9,17 +9,17 @@ interface CartState {
   totalAmount: number;
 }
 
-class ActionAdd {
+class AddItemAction {
   readonly type = ADD;
-  constructor(public item: any) {}
+  constructor(public item: Meal) {}
 }
 
-class ActionRemove {
+class RemoveItemAction {
   readonly type = REMOVE;
   constructor(public id: string) {}
 }
 
-type Action = ActionAdd | ActionRemove;
+type Action = AddItemAction | RemoveItemAction;
 
 const defaultCartState = {
   items: [],
@@ -37,7 +37,7 @@ const cartReducer = (state: CartState, action: Action) => {
       if (existingCartItem) {
         const updatedItem = {
           ...existingCartItem,
-          amount: existingCartItem.amount + action.item.amount,
+          amount: existingCartItem.amount! + action.item.amount!,
         };
         updatedItems = [...state.items];
         updatedItems[existingCartItemIndex] = updatedItem;
@@ -47,7 +47,8 @@ const cartReducer = (state: CartState, action: Action) => {
       return {
         ...state,
         items: updatedItems,
-        totalAmount: state.totalAmount + action.item.price * action.item.amount,
+        totalAmount:
+          state.totalAmount + action.item.price * action.item.amount!,
       };
     }
     case "REMOVE": {
@@ -84,17 +85,14 @@ const cartReducer = (state: CartState, action: Action) => {
 const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [cartState, dispatchCartAction] = useReducer(
-    cartReducer,
-    defaultCartState
-  );
+  const [cartState, dispatchCart] = useReducer(cartReducer, defaultCartState);
 
   const addItemToCart = (item: Meal) => {
-    dispatchCartAction({ type: "ADD", item: item });
+    dispatchCart(new AddItemAction(item));
   };
 
   const removeItemFromCart = (id: string) => {
-    dispatchCartAction({ type: "REMOVE", id: id });
+    dispatchCart(new RemoveItemAction(id));
   };
 
   const cartContext = {
