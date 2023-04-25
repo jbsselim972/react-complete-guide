@@ -3,7 +3,7 @@ import React from "react";
 import classes from "./Cart.module.css";
 import Modal from "../UI/Modal";
 
-const Cart: React.FC = () => {
+const Cart: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const cartItems = (
     <ul className={classes["cart-items"]}>
       {[{ id: "c1", name: "Sushi", amount: 2, price: 12.99 }].map((item) => (
@@ -13,14 +13,16 @@ const Cart: React.FC = () => {
   );
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       {cartItems}
       <div className={classes.total}>
         <span>Total amount</span>
         <span>35.62</span>
       </div>
       <div className={classes.actions}>
-        <button className={classes["button--alt"]}>Close</button>
+        <button className={classes["button--alt"]} onClick={onClose}>
+          Close
+        </button>
         <button className={classes.button}>Order</button>
       </div>
     </Modal>
