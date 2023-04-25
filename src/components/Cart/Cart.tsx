@@ -6,13 +6,17 @@ import CartContext from "../../store/cart-context";
 import CartItem from "./CartItem";
 
 const Cart: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-  const { items, totalAmount } = useContext(CartContext);
+  const { items, totalAmount, addItem, removeItem } = useContext(CartContext);
   const totalAmountFixed = `${totalAmount.toFixed(2)} €`;
   const hasItems = items.length > 0;
 
-  const cartItemRemoveHandler = (id: string) => {};
+  const cartItemRemoveHandler = (id: string) => {
+    removeItem(id);
+  };
 
-  const cartItemAddHandler = (item: Meal) => {};
+  const cartItemAddHandler = (item: Meal) => {
+    addItem({ ...item, amount: 1 });
+  };
 
   const cartItems = (
     <ul className={classes["cart-items"]}>
