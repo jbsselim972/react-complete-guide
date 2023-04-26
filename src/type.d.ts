@@ -42,3 +42,8 @@ interface Auth {
   isAuthenticated: boolean;
   onLogout: () => void;
 }
+
+interface Task {
+  id: string;
+  text: string;
+}
