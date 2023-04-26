@@ -11,6 +11,8 @@ import AuthContext, {
   AuthContextProvider,
 } from "./components/LoginPage/store/auth-context";
 import "./App.css";
+import ForwardCounter from "./components/Counter/ForwardCounter";
+import BackwardCounter from "./components/Counter/BackwardCounter";
 
 const DUMMY_EXPENSES = [
   {
@@ -122,8 +124,16 @@ const LoginPage: React.FC = () => {
   );
 };
 
+const Counter: React.FC = () => {
+  return (
+    <>
+      <ForwardCounter />
+      <BackwardCounter />
+    </>
+  );
+};
 const App: React.FC = () => {
-  return <LoginPage />;
+  return <Counter />;
 };
 
 export default App;
