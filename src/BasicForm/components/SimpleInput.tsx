@@ -1,8 +1,8 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 
 import classes from "./SimpleInput.module.css";
 
-const SimpleInput = (props) => {
+const SimpleInput: React.FC = (props) => {
   const [enteredName, setEnteredName] = useState("");
   const [nameTouched, setNameTouched] = useState(false);
 
