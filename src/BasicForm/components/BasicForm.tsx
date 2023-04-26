@@ -1,10 +1,11 @@
+import { FormEvent } from "react";
 import useInput from "../hooks/use-input";
 import classes from "./SimpleInput.module.css";
 
-const isNotEmpty = (value) => value.trim() !== "";
-const isEmail = (value) => value.includes("@");
+const isNotEmpty = (value: string) => value.trim() !== "";
+const isEmail = (value: string) => value.includes("@");
 
-const BasicForm = (props) => {
+const BasicForm: React.FC = () => {
   const {
     value: firstNameValue,
     isValid: firstNameIsValid,
@@ -32,7 +33,7 @@ const BasicForm = (props) => {
   let formIsValid = false;
   if (firstNameIsValid && lastNameIsValid && emailIsValid) formIsValid = true;
 
-  const submitHandler = (event) => {
+  const submitHandler = (event: FormEvent) => {
     event.preventDefault();
 
     if (!formIsValid) return;
@@ -55,7 +56,7 @@ const BasicForm = (props) => {
 
   return (
     <div className={classes.app}>
-      <form>
+      <form onSubmit={submitHandler}>
         <div className={classes["control-group"]}>
           <div className={firstNameClasses}>
             <label htmlFor="name">First Name</label>
