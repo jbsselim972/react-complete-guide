@@ -1,24 +1,28 @@
+import classes from "./SimpleInput.module.css";
+
 const BasicForm = (props) => {
   return (
-    <form>
-      <div className="control-group">
-        <div className="form-control">
-          <label htmlFor="name">First Name</label>
+    <div className={classes.app}>
+      <form>
+        <div className={classes["control-group"]}>
+          <div className={classes["form-control"]}>
+            <label htmlFor="name">First Name</label>
+            <input type="text" id="name" />
+          </div>
+          <div className={classes["form-control"]}>
+            <label htmlFor="name">Last Name</label>
+            <input type="text" id="name" />
+          </div>
+        </div>
+        <div className={classes["form-control"]}>
+          <label htmlFor="name">E-Mail Address</label>
           <input type="text" id="name" />
         </div>
-        <div className="form-control">
-          <label htmlFor="name">Last Name</label>
-          <input type="text" id="name" />
+        <div className={classes["form-control"]}>
+          <button>Submit</button>
         </div>
-      </div>
-      <div className="form-control">
-        <label htmlFor="name">E-Mail Address</label>
-        <input type="text" id="name" />
-      </div>
-      <div className="form-actions">
-        <button>Submit</button>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 
