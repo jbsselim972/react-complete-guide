@@ -17,7 +17,7 @@ const NewTask: React.FC<{ onAddTask: (task: Task) => void }> = ({
   const enterTaskHandler = async (taskText: string) => {
     sendTaskRequest(
       {
-        url: "https://react-http-6b4a6.firebaseio.com/tasks.json",
+        url: import.meta.env.VITE_BACKEND_TASK_URL + "/tasks.json",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
