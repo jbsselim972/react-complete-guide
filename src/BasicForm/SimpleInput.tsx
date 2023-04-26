@@ -4,6 +4,8 @@ import classes from "./SimpleInput.module.css";
 
 const SimpleInput = (props) => {
   const [enteredName, setEnteredName] = useState("");
+  const [nameIsValid, setNameIsValid] = useState(false);
+  const [nameTouched, setNameTouched] = useState(false);
   const nameInputRef = useRef<HTMLInputElement>(
     null
   ) as MutableRefObject<HTMLInputElement>;
@@ -14,17 +16,23 @@ const SimpleInput = (props) => {
 
   const formSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
-    console.log(enteredName);
-    const enteredValue = nameInputRef.current.value;
-    console.log(enteredValue);
-    // nameInputRef.current.value = ""; // Dont manipulate the DOM
-    setEnteredName("");
+    setNameTouched(true);
+    if (enteredName.trim() !== "") {
+      setNameIsValid(true);
+      return;
+    }
+
+    setNameIsValid(false);
   };
 
+  const inputIsInvalid = !nameIsValid && nameTouched;
+  const inputClasses = `${classes.control} ${
+    inputIsInvalid ? classes.invalid : ""
+  }`;
   return (
     <div className={classes.app}>
       <form onSubmit={formSubmitHandler}>
-        <div className={classes["form-control"]}>
+        <div className={inputClasses}>
           <label htmlFor="name">Your Name</label>
           <input
             ref={nameInputRef}
@@ -33,6 +41,9 @@ const SimpleInput = (props) => {
             onChange={nameChangeHandler}
             value={enteredName}
           />
+          {inputIsInvalid && (
+            <p className={classes["error-text"]}>Name must not be empty.</p>
+          )}
         </div>
         <div className={classes["form-actions"]}>
           <button>Submit</button>
