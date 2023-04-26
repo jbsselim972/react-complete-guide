@@ -1,14 +1,13 @@
-import { FormEvent, MutableRefObject, useRef, useState } from "react";
+import { FormEvent, useState } from "react";
 
 import classes from "./SimpleInput.module.css";
 
 const SimpleInput = (props) => {
   const [enteredName, setEnteredName] = useState("");
-  const [nameIsValid, setNameIsValid] = useState(false);
   const [nameTouched, setNameTouched] = useState(false);
-  const nameInputRef = useRef<HTMLInputElement>(
-    null
-  ) as MutableRefObject<HTMLInputElement>;
+
+  const nameIsValid = enteredName.trim() !== "";
+  const inputIsInvalid = !nameIsValid && nameTouched;
 
   const nameChangeHandler = (event: FormEvent<HTMLInputElement>) => {
     setEnteredName(event.currentTarget.value);
@@ -16,24 +15,18 @@ const SimpleInput = (props) => {
 
   const nameBlurHandler = (event: FormEvent<HTMLInputElement>) => {
     setNameTouched(true);
-    if (enteredName.trim() !== "") {
-      setNameIsValid(true);
-      return;
-    }
   };
 
   const formSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
     setNameTouched(true);
-    if (enteredName.trim() !== "") {
-      setNameIsValid(true);
+    if (!nameIsValid) {
       return;
     }
-
-    setNameIsValid(false);
+    setEnteredName("");
+    setNameTouched(false);
   };
 
-  const inputIsInvalid = !nameIsValid && nameTouched;
   const inputClasses = `${classes.control} ${
     inputIsInvalid ? classes.invalid : ""
   }`;
@@ -43,7 +36,6 @@ const SimpleInput = (props) => {
         <div className={inputClasses}>
           <label htmlFor="name">Your Name</label>
           <input
-            ref={nameInputRef}
             type="text"
             id="name"
             onChange={nameChangeHandler}
