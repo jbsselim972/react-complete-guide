@@ -27,7 +27,7 @@ const SimpleInput = (props) => {
     setNameTouched(false);
   };
 
-  const inputClasses = `${classes.control} ${
+  const inputClasses = `${classes["form-control"]} ${
     inputIsInvalid ? classes.invalid : ""
   }`;
   return (
