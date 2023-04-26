@@ -1,5 +1,7 @@
 import { FormEvent, MutableRefObject, useRef, useState } from "react";
 
+import classes from "./SimpleInput.module.css";
+
 const SimpleInput = (props) => {
   const [enteredName, setEnteredName] = useState("");
   const nameInputRef = useRef<HTMLInputElement>(
@@ -20,21 +22,23 @@ const SimpleInput = (props) => {
   };
 
   return (
-    <form onSubmit={formSubmitHandler}>
-      <div className="form-control">
-        <label htmlFor="name">Your Name</label>
-        <input
-          ref={nameInputRef}
-          type="text"
-          id="name"
-          onChange={nameChangeHandler}
-          value={enteredName}
-        />
-      </div>
-      <div className="form-actions">
-        <button>Submit</button>
-      </div>
-    </form>
+    <div className={classes.app}>
+      <form onSubmit={formSubmitHandler}>
+        <div className={classes["form-control"]}>
+          <label htmlFor="name">Your Name</label>
+          <input
+            ref={nameInputRef}
+            type="text"
+            id="name"
+            onChange={nameChangeHandler}
+            value={enteredName}
+          />
+        </div>
+        <div className={classes["form-actions"]}>
+          <button>Submit</button>
+        </div>
+      </form>
+    </div>
   );
 };
 
