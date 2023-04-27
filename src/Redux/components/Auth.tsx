@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 import classes from "./Auth.module.css";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../store/auth";
+import { authActions } from "../store/auth";
 
 const Auth = () => {
   const dispatch = useDispatch();

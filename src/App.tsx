@@ -6,16 +6,10 @@ import "./App.css";
 // import CourseGoals from "./CourseGoals/CourseGoals";
 // import LoginPage from "./LoginPage/LoginPage";
 // import TaskManager from "./TasksManager/TaskManager";
-import Redux from "./Redux/Redux";
-import { Provider } from "react-redux";
-import store from "./store";
+import AppRedux from "./Redux/AppRedux";
 
 const App: React.FC = () => {
-  return (
-    <Provider store={store}>
-      <Redux />
-    </Provider>
-  );
+  return <AppRedux />;
 };
 
 export default App;

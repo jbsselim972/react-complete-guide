@@ -2,12 +2,12 @@ import { useSelector } from "react-redux";
 import Counter from "./components/Counter";
 
 import "./Redux.css";
-import { RootState } from "../store";
+import { RootState } from "./store";
 import Auth from "./components/Auth";
 import Header from "./components/Header";
 import UserProfile from "./components/UserProfile";
 
-function CounterRedux() {
+function ReduxApp() {
   const isAuth = useSelector((state: RootState) => state.auth.isAuthenticated);
   return (
     <>
@@ -19,4 +19,4 @@ function CounterRedux() {
   );
 }
 
-export default CounterRedux;
+export default ReduxApp;
