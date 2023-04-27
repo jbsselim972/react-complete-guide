@@ -1,62 +1,36 @@
-import { createStore } from "redux";
+import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface CounterState {
+export type CounterState = {
   counter: number;
   showCounter: boolean;
-}
+};
 
-const initialState = {
+const initialState: CounterState = {
   counter: 0,
   showCounter: true,
 };
 
-export const DECREMENT = "[Counter] DECREMENT";
-export const INCREMENT = "[Counter] INCREMENT";
-export const INCREMENT5 = "[Counter] INCREMENT5";
-export const TOGGLE = "[Counter] TOGGLE";
+const counterSlice = createSlice({
+  name: "counter",
+  initialState,
+  reducers: {
+    increment(state) {
+      state.counter++;
+    },
+    decrement(state) {
+      state.counter--;
+    },
+    increase(state, action: PayloadAction<number>) {
+      state.counter += action.payload;
+    },
+    toggleCounter(state) {
+      state.showCounter = !state.showCounter;
+    },
+  },
+});
 
-export class DecrementAction {
-  readonly type = DECREMENT;
-}
-
-export class IncrementAction {
-  readonly type = INCREMENT;
-}
-
-export class IncrementBy5Action {
-  readonly type = INCREMENT5;
-  constructor(public amount: number) {}
-}
-
-export class ToggleAction {
-  readonly type = TOGGLE;
-  constructor(public amount: number) {}
-}
-
-export type CounterActions =
-  | IncrementAction
-  | DecrementAction
-  | IncrementBy5Action
-  | ToggleAction;
-
-export const reducer = (
-  state: CounterState = initialState,
-  action: CounterActions
-) => {
-  switch (action.type) {
-    case INCREMENT:
-      return { ...state, counter: state.counter + 1 };
-    case DECREMENT:
-      return { ...state, counter: state.counter - 1 };
-    case INCREMENT5:
-      return { ...state, counter: state.counter + action.amount };
-    case TOGGLE:
-      return { ...state, showCounter: !state.showCounter };
-    default:
-      return state;
-  }
-};
-
-const store = createStore(reducer);
+const store = configureStore({
+  reducer: counterSlice.reducer,
+});
 
 export default store;
