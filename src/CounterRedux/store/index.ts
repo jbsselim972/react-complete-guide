@@ -8,20 +8,27 @@ const initialState = {
   counter: 0,
 };
 
-class Decrement {
-  readonly type = "DECREMENT";
+export const DECREMENT = "DECREMENT";
+export const INCREMENT = "INCREMENT";
+
+export class DecrementAction {
+  readonly type = DECREMENT;
 }
 
-class Increment {
-  readonly type = "INCREMENT";
+export class IncrementAction {
+  readonly type = INCREMENT;
 }
 
-type Action = Increment | Decrement;
-export const reducer = (state: State = initialState, action: Action) => {
+export type CounterActions = IncrementAction | DecrementAction;
+
+export const reducer = (
+  state: State = initialState,
+  action: CounterActions
+) => {
   switch (action.type) {
-    case "INCREMENT":
+    case INCREMENT:
       return { ...state, counter: state.counter + 1 };
-    case "DECREMENT":
+    case DECREMENT:
       return { ...state, counter: state.counter - 1 };
     default:
       return state;
