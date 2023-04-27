@@ -1,5 +1,9 @@
 import { createStore } from "redux";
 
+export interface State {
+  counter: number;
+}
+
 const initialState = {
   counter: 0,
 };
@@ -13,7 +17,7 @@ class Increment {
 }
 
 type Action = Increment | Decrement;
-const reducer = (state = initialState, action: Action) => {
+export const reducer = (state: State = initialState, action: Action) => {
   switch (action.type) {
     case "INCREMENT":
       return { ...state, counter: state.counter + 1 };
