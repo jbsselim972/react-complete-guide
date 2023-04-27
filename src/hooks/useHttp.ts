@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 interface RequestConfig {
   url: string;
@@ -10,27 +10,30 @@ interface RequestConfig {
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const sendRequest = async (
-    { url, method = "GET", body, headers }: RequestConfig,
-    applyData: (data: any) => void
-  ) => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(url, {
-        method,
-        body,
-        headers,
-      });
-      if (!response.ok) {
-        throw new Error();
+  const sendRequest = useCallback(
+    async (
+      { url, method = "GET", body, headers = {} }: RequestConfig,
+      applyData?: (data: any) => void
+    ) => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(url, {
+          method,
+          headers,
+          body,
+        });
+        if (!response.ok) {
+          throw new Error();
+        }
+        const data = await response.json();
+        applyData && applyData(data);
+      } catch (err: any) {
+        setError(err.message || "Something went wrong!");
       }
-      const data = await response.json();
-      applyData(data);
-    } catch (err: any) {
-      setError(err.message || "Something went wrong!");
-    }
-    setIsLoading(false);
-  };
+      setIsLoading(false);
+    },
+    []
+  );
 
   return {
     isLoading,

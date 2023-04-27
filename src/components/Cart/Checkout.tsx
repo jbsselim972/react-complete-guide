@@ -5,7 +5,12 @@ import classes from "./Checkout.module.css";
 const isEmpty = (value: string) => value.trim() === "";
 const isFiveChars = (value: string) => value.trim().length >= 5;
 
-const Checkout: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+interface CheckoutProps {
+  onCancel: () => void;
+  onConfirm: (userData: UserData) => void;
+}
+
+const Checkout: React.FC<CheckoutProps> = ({ onCancel, onConfirm }) => {
   const [formInputValidity, setFormInputsValidity] = useState({
     name: true,
     street: true,
@@ -46,9 +51,15 @@ const Checkout: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
     const formIsValid =
       nameIsValid && streetIsValid && cityIsValid && postalCodeIsValid;
-    if (formIsValid) {
+    if (!formIsValid) {
       return;
     }
+    onConfirm({
+      name,
+      street,
+      city,
+      postalCode,
+    });
   };
 
   return (
@@ -92,7 +103,7 @@ const Checkout: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         {!formInputValidity.city && <p>Please enter a City!</p>}
       </div>
       <div className={classes.actions}>
-        <button type="button" onClick={onClose}>
+        <button type="button" onClick={onCancel}>
           Cancel
         </button>
         <button type="submit">Confirm</button>

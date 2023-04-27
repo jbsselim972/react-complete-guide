@@ -5,12 +5,14 @@ interface Context {
   totalAmount: number;
   addItem: (item: Meal) => void;
   removeItem: (id: string) => void;
+  clearCart: () => void;
 }
 const CartContext = createContext<Context>({
   items: [],
   totalAmount: 0,
   addItem: () => {},
   removeItem: () => {},
+  clearCart: () => {},
 });
 
 export default CartContext;

@@ -3,6 +3,7 @@ import CartContext from "./cart-context";
 
 const ADD = "ADD";
 const REMOVE = "REMOVE";
+const CLEAR = "CLEAR";
 
 interface CartState {
   items: Meal[];
@@ -19,7 +20,11 @@ class RemoveItemAction {
   constructor(public id: string) {}
 }
 
-type Action = AddItemAction | RemoveItemAction;
+class ClearCartAction {
+  readonly type = CLEAR;
+}
+
+type Action = AddItemAction | RemoveItemAction | ClearCartAction;
 
 const defaultCartState = {
   items: [],
@@ -77,6 +82,8 @@ const cartReducer = (state: CartState, action: Action) => {
         totalAmount: updatedTotalAmount,
       };
     }
+    case CLEAR:
+      return { ...state, ...defaultCartState };
     default:
       return state;
   }
@@ -95,11 +102,16 @@ const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     dispatchCart(new RemoveItemAction(id));
   };
 
+  const clearCartHandler = () => {
+    dispatchCart(new ClearCartAction());
+  };
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCart,
     removeItem: removeItemFromCart,
+    clearCart: clearCartHandler,
   };
 
   return (
