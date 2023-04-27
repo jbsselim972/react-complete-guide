@@ -8,7 +8,7 @@ import LoginPage from "./LoginPage/LoginPage";
 import TaskManager from "./TasksManager/TaskManager";
 import Redux from "./Redux/Redux";
 import { Provider } from "react-redux";
-import store from "./Redux/store";
+import store from "./store";
 
 const App: React.FC = () => {
   return (
