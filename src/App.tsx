@@ -1,7 +1,7 @@
 import React from "react";
 
-import ShopCart from "./ShopCart/ShopCart";
 import "./App.css";
+import Shop from "./ShopCart";
 // import Counter from "./Counter/Counter";
 // import ExpenseTracker from "./ExpenseTracker/ExpenseTracker";
 // import CourseGoals from "./CourseGoals/CourseGoals";
@@ -10,7 +10,7 @@ import "./App.css";
 // import AppRedux from "./Redux/AppRedux";
 
 const App: React.FC = () => {
-  return <ShopCart />;
+  return <Shop />;
 };
 
 export default App;
