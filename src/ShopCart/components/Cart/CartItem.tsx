@@ -2,17 +2,20 @@ import { FC } from "react";
 import { Product } from "../Product/Products";
 import classes from "./CartItem.module.css";
 
-export type Item = Product & { quantity: number; total: number };
+export type Item = Product & {
+  quantity: number;
+  totalPrice: number;
+};
 
 const CartItem: FC<{ item: Item }> = (props) => {
-  const { title, quantity, total, price } = props.item;
+  const { title, quantity, totalPrice, price } = props.item;
 
   return (
     <li className={classes.item}>
       <header>
         <h3>{title}</h3>
         <div className={classes.price}>
-          ${total.toFixed(2)}{" "}
+          ${totalPrice.toFixed(2)}{" "}
           <span className={classes.itemprice}>(${price.toFixed(2)}/item)</span>
         </div>
       </header>
