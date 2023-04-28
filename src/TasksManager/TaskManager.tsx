@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useHttp from "./hooks/use-http";
+import useHttp from "../shared/hooks/use-http";
 import NewTask from "./components/NewTask/NewTask";
 import Tasks from "./components/Tasks/Tasks";
 

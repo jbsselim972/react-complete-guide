@@ -1,6 +1,6 @@
 import Section from "../UI/Section";
 import TaskForm from "./TaskForm";
-import useHttp from "../../hooks/use-http";
+import useHttp from "../../../shared/hooks/use-http";
 
 const NewTask: React.FC<{ onAddTask: (task: Task) => void }> = ({
   onAddTask,
