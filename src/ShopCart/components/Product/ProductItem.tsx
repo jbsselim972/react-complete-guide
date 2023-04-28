@@ -6,7 +6,7 @@ import { Product } from "./Products";
 const ProductItem: FC<Product> = ({ title, price, description }) => {
   return (
     <li className={classes.item}>
-      <Card>
+      <Card className={classes["item-card"]}>
         <header>
           <h3>{title}</h3>
           <div className={classes.price}>${price.toFixed(2)}</div>

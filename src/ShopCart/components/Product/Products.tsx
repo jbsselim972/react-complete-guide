@@ -2,7 +2,7 @@ import { FC } from "react";
 import ProductItem from "./ProductItem";
 import classes from "./Products.module.css";
 
-export type Product = { title: string; price: number; description: string };
+export type Product = { title: string; price: number; description?: string };
 
 const Products: FC = () => {
   return (

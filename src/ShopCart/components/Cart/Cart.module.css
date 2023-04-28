@@ -14,3 +14,11 @@
   padding: 0;
   margin: 0;
 }
+
+.cart-card {
+    margin: 1rem auto;
+    border-radius: 6px;
+    padding: 1rem;
+    width: 90%;
+    max-width: 40rem;
+}

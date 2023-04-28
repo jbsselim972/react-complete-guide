@@ -3,7 +3,9 @@ import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
 import Products from "./components/Product/Products";
 
-const Shop: FC = () => {
+import "./ShopCart.css";
+
+const ShopCart: FC = () => {
   return (
     <Layout>
       <Cart />
@@ -12,4 +14,4 @@ const Shop: FC = () => {
   );
 };
 
-export default Shop;
+export default ShopCart;

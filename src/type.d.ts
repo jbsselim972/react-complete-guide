@@ -6,7 +6,7 @@ interface Expense {
 }
 
 interface ExpenseFormProps {
-  onSaveExpenseData: ({}: Expense) => void;
+  onSaveExpenseData: (_: Expense) => void;
   toggleForm: () => void;
 }
 
@@ -20,7 +20,7 @@ interface ExpensesListProps {
 }
 
 interface NewExpenseProps {
-  onAddExpense: ({}: Expense) => void;
+  onAddExpense: (_: Expense) => void;
 }
 
 interface CardProps {

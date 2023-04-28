@@ -5,7 +5,7 @@ import classes from "./MainHeader.module.css";
 const MainHeader: FC = () => {
   return (
     <header className={classes.header}>
-      <h1>ReduxCart</h1>
+      <h1>ShopCart</h1>
       <nav>
         <ul>
           <li>
