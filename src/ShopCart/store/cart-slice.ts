@@ -1,30 +1,36 @@
-import { AnyAction, PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Item } from "../components/Cart/CartItem";
 import { Product } from "../components/Product/Products";
-import { uiActions } from "./ui-slice";
-import { Dispatch } from "react";
 
 export type CartState = {
   items: Item[];
   totalQuantity: number;
   totalAmount: number;
+  changed?: boolean;
 };
 
 const initalState: CartState = {
   items: [],
   totalQuantity: 0,
   totalAmount: 0,
+  changed: false,
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: initalState,
   reducers: {
+    replaceCart(state, action: PayloadAction<CartState>) {
+      state.totalAmount = action.payload.totalAmount;
+      state.totalQuantity = action.payload.totalQuantity;
+      state.items = action.payload.items;
+    },
     addItemToCart(state, action: PayloadAction<Product>) {
       const newItem = action.payload;
       const existingItem = state.items.find((i) => i.id === newItem.id);
       state.totalQuantity++;
       state.totalAmount = state.totalAmount + newItem.price;
+      state.changed = true;
       if (!existingItem) {
         state.items.push({
           id: newItem.id,
@@ -42,6 +48,7 @@ const cartSlice = createSlice({
       const id = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
       state.totalQuantity--;
+      state.changed = true;
       if (existingItem) {
         state.totalAmount = state.totalAmount - existingItem.price;
         if (existingItem.quantity === 1) {
@@ -55,51 +62,6 @@ const cartSlice = createSlice({
     },
   },
 });
-
-export const sendCartData = (cart: CartState) => {
-  return async (dispatch: Dispatch<AnyAction>) => {
-    dispatch(
-      uiActions.showNotification({
-        status: "pending",
-        title: "Sending...",
-        message: "Sending cart data",
-      })
-    );
-
-    const sendRequest = async () => {
-      const response = await fetch(
-        import.meta.env.VITE_BACKEND_URL + "/cart.json",
-        {
-          method: "PUT",
-          body: JSON.stringify(cart),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Sending cart data failed");
-      }
-    };
-
-    try {
-      await sendRequest();
-      dispatch(
-        uiActions.showNotification({
-          title: "Success",
-          status: "success",
-          message: "Sent cart data successfully",
-        })
-      );
-    } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          title: "Error",
-          status: "error",
-          message: "Sending cart data failed",
-        })
-      );
-    }
-  };
-};
 
 export const cartActions = cartSlice.actions;
 export default cartSlice;

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
 import Products from "./components/Product/Products";
@@ -7,7 +7,7 @@ import "./ShopCart.css";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./store";
 import Notification from "../shared/UI/Notification";
-import { sendCartData } from "./store/cart-slice";
+import { fetchCartData, sendCartData } from "./store/cart-actions";
 let isInitial = true;
 const ShopCart: FC = () => {
   const showCart = useSelector((state: RootState) => state.ui.cartIsVisible);
@@ -16,15 +16,16 @@ const ShopCart: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("render");
+    dispatch<any>(fetchCartData());
+  }, [dispatch]);
 
+  useEffect(() => {
     if (isInitial) {
-      console.log("first");
       isInitial = false;
       return;
     }
 
-    dispatch<any>(sendCartData(cart));
+    if (cart.changed) dispatch<any>(sendCartData(cart));
   }, [cart, dispatch]);
 
   return (
