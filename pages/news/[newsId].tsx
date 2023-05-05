@@ -1,7 +1,9 @@
-import React from "react";
+import { useRouter } from "next/router";
 
 const DetailPage = () => {
-  return <div>DetailPage</div>;
+  const router = useRouter();
+  const id = router.query.newsId;
+  return <div>DetailPage {id}</div>;
 };
 
 export default DetailPage;
