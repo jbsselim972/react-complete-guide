@@ -1,3 +1,4 @@
+import Layout from "@/components/layout/Layout";
 import NewMeetupForm from "@/components/meetups/NewMeetupForm";
 import React from "react";
 

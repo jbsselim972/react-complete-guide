@@ -26,11 +26,7 @@ const HomePage = () => {
       address: "Some Address3",
     },
   ];
-  return (
-    <Layout>
-      <MeetupList meetups={MEETUPS} />
-    </Layout>
-  );
+  return <MeetupList meetups={MEETUPS} />;
 };
 
 export default HomePage;
