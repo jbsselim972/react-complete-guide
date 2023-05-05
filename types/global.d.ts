@@ -3,4 +3,5 @@ interface Meetup {
   title: string;
   address: string;
   image: string;
+  description?: string;
 }
