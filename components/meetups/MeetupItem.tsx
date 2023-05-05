@@ -7,7 +7,7 @@ const MeetupItem = ({ title, image, address }: Meetup) => {
     <li className={classes.item}>
       <Card>
         <div className={classes.image}>
-          <Image src={image} alt={title} />
+          <Image src={image} alt={title} width={300} height={200} />
         </div>
         <div className={classes.content}>
           <h3>{title}</h3>
