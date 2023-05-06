@@ -13,7 +13,7 @@ const HomePage: NextPage<{ meetups: Meetup[] }> = ({ meetups }) => {
           content="Browse a huge list of React meetups"
         />
       </Head>
-      <MeetupList meetups={meetups} />;
+      <MeetupList meetups={meetups} />
     </>
   );
 };
@@ -40,15 +40,5 @@ export const getStaticProps: GetStaticProps = async () => {
     revalidate: 1,
   };
 };
-
-// export const getServerSideProps = async (context: BaseContext) => {
-//   const req = context.req;
-//   const res = context.res;
-//   return {
-//     props: {
-//       meetups: MEETUPS,
-//     }
-//   }
-// }
 
 export default HomePage;
