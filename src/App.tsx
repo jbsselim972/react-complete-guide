@@ -1,7 +1,6 @@
-import React from "react";
-
+import Animation from "./Animations/Animation";
 import "./App.css";
-import Shop from "./ShopCart";
+// import Shop from "./ShopCart";
 // import Counter from "./Counter/Counter";
 // import ExpenseTracker from "./ExpenseTracker/ExpenseTracker";
 // import CourseGoals from "./CourseGoals/CourseGoals";
@@ -10,7 +9,7 @@ import Shop from "./ShopCart";
 // import AppRedux from "./Redux/AppRedux";
 
 const App: React.FC = () => {
-  return <Shop />;
+  return <Animation />;
 };
 
 export default App;
