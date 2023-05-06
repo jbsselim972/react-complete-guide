@@ -1,5 +1,6 @@
 import NewMeetupForm from "@/components/meetups/NewMeetupForm";
 import { NextPage } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -18,7 +19,18 @@ const NewMeetupPage: NextPage = () => {
     router.push("/");
   };
 
-  return <NewMeetupForm onAddMeetup={addMeetupHandler} />;
+  return (
+    <>
+      <Head>
+        <title>Add New Meetup | React Meetups</title>
+        <meta
+          name="description"
+          content="Add a new meetup and share it with others"
+        />
+      </Head>
+      <NewMeetupForm onAddMeetup={addMeetupHandler} />;
+    </>
+  );
 };
 
 export default NewMeetupPage;

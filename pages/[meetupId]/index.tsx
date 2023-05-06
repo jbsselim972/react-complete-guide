@@ -1,9 +1,18 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { MongoClient, ObjectId } from "mongodb";
 import MeetupDetail from "@/components/meetups/MeetupDetail";
+import Head from "next/head";
 
 const MeetupDetails = ({ meetupData }: { meetupData: Meetup }) => {
-  return <MeetupDetail {...meetupData} />;
+  return (
+    <>
+      <Head>
+        <title>{meetupData.title} | React Meetups</title>
+        <meta name="description" content={meetupData.description} />
+      </Head>
+      <MeetupDetail {...meetupData} />;
+    </>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
