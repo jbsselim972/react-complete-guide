@@ -2,12 +2,7 @@ import Image from "next/image";
 
 import classes from "@/components/meetups/MeetupDetail.module.css";
 
-const MeetupDetail = ({
-  image,
-  title,
-  address,
-  description,
-}: Omit<Meetup, "id">) => {
+const MeetupDetail = ({ image, title, address, description }: Meetup) => {
   return (
     <section className={classes.detail}>
       <Image src={image} alt={title} width={500} height={500} />

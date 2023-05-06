@@ -1,4 +1,6 @@
 import MeetupList from "@/components/meetups/MeetupList";
+import { GetStaticProps } from "next";
+import { BaseContext } from "next/dist/shared/lib/utils";
 import React, { FC } from "react";
 
 const MEETUPS = [
@@ -29,7 +31,7 @@ const HomePage = ({ meetups }: { meetups: Meetup[] }) => {
   return <MeetupList meetups={meetups} />;
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       meetups: MEETUPS,
@@ -37,5 +39,15 @@ export const getStaticProps = async () => {
     revalidate: 1,
   };
 };
+
+// export const getServerSideProps = async (context: BaseContext) => {
+//   const req = context.req;
+//   const res = context.res;
+//   return {
+//     props: {
+//       meetups: MEETUPS,
+//     }
+//   }
+// }
 
 export default HomePage;
