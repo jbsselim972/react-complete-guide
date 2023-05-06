@@ -1,4 +1,3 @@
-import Layout from "@/components/layout/Layout";
 import NewMeetupForm from "@/components/meetups/NewMeetupForm";
 import { NextPage } from "next";
 import { useRouter } from "next/router";

@@ -1,7 +1,7 @@
-import MeetupList from "@/components/meetups/MeetupList";
+import React from "react";
+import { MongoClient } from "mongodb";
 import { GetStaticProps, NextPage } from "next";
-import { BaseContext } from "next/dist/shared/lib/utils";
-import React, { FC } from "react";
+import MeetupList from "@/components/meetups/MeetupList";
 
 const MEETUPS = [
   {
@@ -32,9 +32,23 @@ const HomePage: NextPage<{ meetups: Meetup[] }> = ({ meetups }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
+  const mongoUrl = process.env.MONGO_URI!;
+  const client = await MongoClient.connect(mongoUrl);
+  const db = client.db();
+
+  const meetupsCollection = db.collection("meetups");
+  const meetups = await meetupsCollection.find().toArray();
+  client.close();
+
   return {
     props: {
-      meetups: MEETUPS,
+      meetups: meetups.map((meetup) => ({
+        title: meetup.title,
+        image: meetup.image,
+        description: meetup.description,
+        address: meetup.address,
+        id: meetup._id.toString(),
+      })),
     },
     revalidate: 1,
   };
