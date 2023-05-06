@@ -1,5 +1,5 @@
 import MeetupList from "@/components/meetups/MeetupList";
-import { GetStaticProps } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { BaseContext } from "next/dist/shared/lib/utils";
 import React, { FC } from "react";
 
@@ -27,7 +27,7 @@ const MEETUPS = [
   },
 ];
 
-const HomePage = ({ meetups }: { meetups: Meetup[] }) => {
+const HomePage: NextPage<{ meetups: Meetup[] }> = ({ meetups }) => {
   return <MeetupList meetups={meetups} />;
 };
 
