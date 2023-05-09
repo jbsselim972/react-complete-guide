@@ -41,7 +41,9 @@ const Animation: FC = () => {
           />
         )}
       </Transition>
-      <Modal closed={hideModal} show={openModal} />
+      <Transition in={openModal} timeout={500} mountOnEnter unmountOnExit>
+        {(state) => <Modal closed={hideModal} show={state} />}
+      </Transition>
       <Backdrop show={openModal} />
       <button className="Button" onClick={showModal}>
         Open Modal
