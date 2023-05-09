@@ -10,7 +10,18 @@ const animationTiming = {
 
 const Modal: FC<{ show: boolean; closed: () => void }> = ({ closed, show }) => {
   return (
-    <Transition mountOnEnter unmountOnExit in={show} timeout={animationTiming}>
+    <Transition
+      mountOnEnter
+      unmountOnExit
+      in={show}
+      timeout={animationTiming}
+      onEnter={() => console.log("onEnter")}
+      onEntering={() => console.log("onEntering")}
+      onEntered={() => console.log("onEntered")}
+      onExit={() => console.log("onExit")}
+      onExiting={() => console.log("onExiting")}
+      onExited={() => console.log("onExited")}
+    >
       {(state) => (
         <div
           className={`${classes.modal} 
