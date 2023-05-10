@@ -1,5 +1,6 @@
-import Animation from "./Animations/Animation";
+// import Animation from "./Animations/Animation";
 import "./App.css";
+import CtxwHooks from "./CtxwHooks";
 // import Shop from "./ShopCart";
 // import Counter from "./Counter/Counter";
 // import ExpenseTracker from "./ExpenseTracker/ExpenseTracker";
@@ -9,7 +10,7 @@ import "./App.css";
 // import AppRedux from "./Redux/AppRedux";
 
 const App: React.FC = () => {
-  return <Animation />;
+  return <CtxwHooks />;
 };
 
 export default App;
