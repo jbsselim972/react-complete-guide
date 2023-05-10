@@ -17,9 +17,9 @@ const Modal: FC<{ show: boolean; closed: () => void }> = ({ closed, show }) => {
       timeout={animationTiming}
       classNames={{
         enter: "",
-        enterActive: "modalopen",
+        enterActive: classes.modalopen,
         exit: "",
-        exitActive: "modalclose",
+        exitActive: classes.modalclose,
       }}
     >
       <div className={classes.modal}>
