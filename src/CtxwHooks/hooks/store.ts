@@ -10,7 +10,7 @@ let globalState: State;
 let listeners: Listeners = [];
 let actions: Actions;
 
-export const useStore = (): [State, DispatchAction] => {
+export const useStore = (shouldListen = true): [State, DispatchAction] => {
   const setState = useState(globalState)[1];
 
   const dispatch: DispatchAction = (actionIdentifier: string, payload: any) => {
@@ -23,11 +23,12 @@ export const useStore = (): [State, DispatchAction] => {
   };
 
   useEffect(() => {
-    listeners.push(setState);
+    if (shouldListen) listeners.push(setState);
+
     return () => {
-      listeners = listeners.filter((li) => li !== setState);
+      if (shouldListen) listeners = listeners.filter((li) => li !== setState);
     };
-  }, [setState]);
+  }, [setState, shouldListen]);
 
   return [globalState, dispatch];
 };
