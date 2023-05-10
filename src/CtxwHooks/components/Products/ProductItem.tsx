@@ -1,15 +1,15 @@
 import { FC } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 import Card from "../UI/Card";
 import "./ProductItem.css";
-import { toggleFav } from "../../store/actions/products";
+// import { toggleFav } from "../../store/actions/products";
 
 const ProductItem: FC<Product> = ({ id, title, description, isFavorite }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const toggleFavHandler = () => {
-    dispatch(toggleFav(id));
+    // dispatch(toggleFav(id));
   };
 
   return (
