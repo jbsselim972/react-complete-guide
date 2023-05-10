@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import classes from "./Modal.module.css";
-import { Transition } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 
 const animationTiming = {
   enter: 400,
@@ -10,36 +10,25 @@ const animationTiming = {
 
 const Modal: FC<{ show: boolean; closed: () => void }> = ({ closed, show }) => {
   return (
-    <Transition
+    <CSSTransition
       mountOnEnter
       unmountOnExit
       in={show}
       timeout={animationTiming}
-      onEnter={() => console.log("onEnter")}
-      onEntering={() => console.log("onEntering")}
-      onEntered={() => console.log("onEntered")}
-      onExit={() => console.log("onExit")}
-      onExiting={() => console.log("onExiting")}
-      onExited={() => console.log("onExited")}
+      classNames={{
+        enter: "",
+        enterActive: "modalopen",
+        exit: "",
+        exitActive: "modalclose",
+      }}
     >
-      {(state) => (
-        <div
-          className={`${classes.modal} 
-            ${
-              state === "entering"
-                ? classes["modal-open"]
-                : state === "exiting"
-                ? classes["modal-close"]
-                : null
-            }`}
-        >
-          <h1>A Modal</h1>
-          <button className="Button" onClick={closed}>
-            Dismiss
-          </button>
-        </div>
-      )}
-    </Transition>
+      <div className={classes.modal}>
+        <h1>A Modal</h1>
+        <button className="Button" onClick={closed}>
+          Dismiss
+        </button>
+      </div>
+    </CSSTransition>
   );
 };
 
