@@ -1,11 +1,17 @@
 import { FC, PropsWithChildren, createContext, useState } from "react";
 
-export const ProductsContext = createContext<{ products: Product[] }>({
+interface ProductsCtx {
+  products: Product[];
+  toggleFav: (productId: string) => void;
+}
+
+export const ProductsContext = createContext<ProductsCtx>({
   products: [],
+  toggleFav: () => {},
 });
 
 const ProductsProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [productsList] = useState<Product[]>([
+  const [productsList, setProductsList] = useState<Product[]>([
     {
       id: "p1",
       title: "Red Scarf",
@@ -31,8 +37,24 @@ const ProductsProvider: FC<PropsWithChildren> = ({ children }) => {
       isFavorite: false,
     },
   ]);
+
+  const toggleFavorite: ProductsCtx["toggleFav"] = (productId) => {
+    setProductsList((currentProdList) => {
+      const prodIndex = currentProdList.findIndex((p) => p.id === productId);
+      const newFavStatus = !currentProdList[prodIndex].isFavorite;
+      const updatedProducts = [...currentProdList];
+      updatedProducts[prodIndex] = {
+        ...currentProdList[prodIndex],
+        isFavorite: newFavStatus,
+      };
+      return updatedProducts;
+    });
+  };
+
   return (
-    <ProductsContext.Provider value={{ products: productsList }}>
+    <ProductsContext.Provider
+      value={{ products: productsList, toggleFav: toggleFavorite }}
+    >
       {children}
     </ProductsContext.Provider>
   );
